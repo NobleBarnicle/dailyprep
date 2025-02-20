@@ -1,0 +1,102 @@
+{
+  "Part": {
+    "tag": "h2",
+    "class": "Part",
+    "attributes": {
+      "id": "part_id"
+    },
+    "content": "part_title",
+    "subheading": {
+      "tag": "h3",
+      "class": "Subheading",
+      "content": "subheading"
+    }
+  },
+  "Section": {
+    "tag": "p",
+    "class": "Section",
+    "attributes": {
+      "id": "section_id"
+    },
+    "content": "section_content",
+    "number": {
+      "tag": "a",
+      "class": "sectionLabel",
+      "content": "section_number"
+    },
+    "marginal_note": {
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note"
+    },
+    "historical_note": {
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note"
+    }
+  },
+  "SectionWithList": {
+    "tag": "p",
+    "class": "Section",
+    "attributes": {
+      "id": "section_id"
+    },
+    "content": "section_content",
+    "number": {
+      "tag": "a",
+      "class": "sectionLabel",
+      "content": "section_number"
+    },
+    "provision_list": {
+      "tag": "ul",
+      "class": "ProvisionList",
+      "items": {
+        "tag": "li",
+        "content": "provision_content",
+        "sub_items": {
+          "tag": "ul",
+          "class": "ProvisionList",
+          "items": {
+            "tag": "li",
+            "content": "sub_provision_content"
+          }
+        }
+      }
+    },
+    "historical_note": {
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note"
+    }
+  },
+  "SectionWithInlineDefinitions": {
+    "tag": "p",
+    "class": "Section",
+    "attributes": {
+      "id": "section_id"
+    },
+    "content": "section_content",
+    "number": {
+      "tag": "a",
+      "class": "sectionLabel",
+      "content": "section_number"
+    },
+    "defined_terms": {
+      "tag": "span",
+      "class": "DefinedTerm",
+      "content": "defined_term"
+    },
+    "historical_note": {
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note"
+    }
+  },
+  "DocumentMetadata": {
+    "tag": "meta",
+    "attributes": {
+      "name": "meta_name",
+      "content": "meta_content"
+    }
+  }
+}
