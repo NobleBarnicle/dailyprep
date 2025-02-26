@@ -1,39 +1,444 @@
-[
-    {
-        "part_title": "Part I",
-        "part_id": "h-115244",
-        "subheading": "General",
-        "sections": [
-            {
-                "number": "23.1",
-                "content": "23.1For greater certainty, sections 21 to 23 apply in respect of an accused notwithstanding the fact that the person whom the accused aids or abets, counsels or procures or receives, comforts or assists cannot be convicted of the offence.",
-                "marginal_note": "Marginal note:Where one party cannot be convicted",
-                "historical_note": "R.S., 1985, c. 24 (2nd Supp.), s. 45"
-            },
-            {
-                "number": "22.1",
-                "content": "22.1In respect of an offence that requires the prosecution to prove negligence, an organization is a party to the offence if",
-                "marginal_note": "Marginal note:Offences of negligence — organizations",
-                "historical_note": null
-            },
-            {
-                "number": "2.1",
-                "content": "2.1In this Act,ammunition,antique firearm,automatic firearm,cartridge magazine,cross-bow,firearm part,handgun,imitation firearm,prohibited ammunition,prohibited device,prohibited firearm,prohibited weapon,replica firearm,restricted firearmandrestricted weapon, as well asauthorization,licenceandregistration certificatewhen used in relation to those words and expressions, have the same meaning as in subsection 84(1).",
-                "marginal_note": "Marginal note:Further definitions — firearms",
-                "historical_note": "2009, c. 22, s. 12023, c. 32, s. 0.12023, c. 32, s. 0.10.1(1)Section 2.1 of theCriminal Codeis replaced by the following:Marginal note:Further definitions — firearms2.1In this Act,ammunition,antique firearm,automatic firearm,cartridge magazine,cross-bow,firearm part,handgun,imitation firearm,prohibited ammunition,prohibited device,prohibited firearm,prohibited weapon,replica firearm,restricted firearmandrestricted weapon, as well asauthorization,licenceandregistration certificatewhen used in relation to those words and expressions, have the same meaning as in subsection 84(1).(2)Subsection (1) comes into force on a day to be fixed by order of the Governor in Council."
-            },
-            {
-                "number": "118",
-                "content": "118In this Part,",
-                "marginal_note": "Marginal note:Definitions",
-                "historical_note": null
-            },
-            {
-                "number": "53",
-                "content": "53Every one who",
-                "marginal_note": "Marginal note:Inciting to mutiny",
-                "historical_note": null
-            }
-        ]
-    }
-]
+{
+    "metadata": {
+        "title": "Consolidated federal laws of Canada, Criminal Code",
+        "creator": "Legislative Services Branch",
+        "issued": "2024-01-14",
+        "modified": "2024-01-14",
+        "language": "eng"
+    },
+    "sections": [
+        {
+            "type": "Part",
+            "part_id": "h-115244",
+            "text": "Part I"
+        },
+        {
+            "number": "23.1",
+            "marginal_note": "Where one party cannot be convicted",
+            "section_id": "115611",
+            "type": "Section",
+            "text": "23.1 For greater certainty, sections 21 to 23 apply in respect of an accused notwithstanding the fact that the person whom the accused aids or abets, counsels or procures or receives, comforts or assists cannot be convicted of the offence.",
+            "historical_note": "R.S., 1985, c. 24 (2nd Supp.), s. 45"
+        },
+        {
+            "number": "22.1",
+            "marginal_note": "Offences of negligence — organizations",
+            "section_id": "115590",
+            "type": "SectionWithList",
+            "lead_in": "22.1 In respect of an offence that requires the prosecution to prove negligence, an organization is a party to the offence if",
+            "items": [
+                {
+                    "text": "acting within the scope of their authority",
+                    "label": "(a)",
+                    "sub_items": [
+                        {
+                            "text": "one of its representatives is a party to the offence, or",
+                            "label": "(i)"
+                        },
+                        {
+                            "text": "two or more of its representatives engage in conduct, whether by act or omission, such that, if it had been the conduct of only one representative, that representative would have been a party to the offence; and",
+                            "label": "(ii)"
+                        }
+                    ]
+                },
+                {
+                    "text": "the senior officer who is responsible for the aspect of the organization’s activities that is relevant to the offence departs — or the senior officers, collectively, depart — markedly from the standard of care that, in the circumstances, could reasonably be expected to prevent a representative of the organization from being a party to the offence.",
+                    "label": "(b)"
+                }
+            ],
+            "historical_note": "2003, c. 21, s. 2"
+        },
+        {
+            "number": "2.1",
+            "marginal_note": "Further definitions — firearms",
+            "section_id": "1487945",
+            "type": "SectionWithInlineDefinitions",
+            "text": "2.1 In this Act, ammunition, antique firearm, automatic firearm, cartridge magazine, cross-bow, firearm part, handgun, imitation firearm, prohibited ammunition, prohibited device, prohibited firearm, prohibited weapon, replica firearm, restricted firearm and restricted weapon, as well as authorization, licence and registration certificate when used in relation to those words and expressions, have the same meaning as in subsection 84(1).",
+            "defined_terms": [
+                "ammunition",
+                "antique firearm",
+                "automatic firearm",
+                "cartridge magazine",
+                "cross-bow",
+                "firearm part",
+                "handgun",
+                "imitation firearm",
+                "prohibited ammunition",
+                "prohibited device",
+                "prohibited firearm",
+                "prohibited weapon",
+                "replica firearm",
+                "restricted firearm",
+                "restricted weapon",
+                "authorization",
+                "licence",
+                "registration certificate"
+            ],
+            "historical_note": "2009, c. 22, s. 1 2023, c. 32, s. 0.1"
+        },
+        {
+            "number": "118",
+            "marginal_note": "Definitions",
+            "section_id": "117789",
+            "type": "SectionWithIndentedDefinitions",
+            "text": "118 In this Part,",
+            "definitions": [
+                {
+                    "term": "evidence",
+                    "text": "evidence or statement means an assertion of fact, opinion, belief or knowledge, whether material or not and whether admissible or not; (témoignage, déposition ou déclaration)"
+                },
+                {
+                    "term": "government",
+                    "text": "government means(a) the Government of Canada,(b) the government of a province, or(c) Her Majesty in right of Canada or a province; (gouvernement)",
+                    "items": [
+                        {
+                            "text": "the Government of Canada,",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "the government of a province, or",
+                            "label": "(b)"
+                        },
+                        {
+                            "text": "Her Majesty in right of Canada or a province; (gouvernement)",
+                            "label": "(c)"
+                        }
+                    ]
+                },
+                {
+                    "term": "judicial proceeding",
+                    "text": "judicial proceeding means a proceeding(a) in or under the authority of a court of justice,(b) before the Senate or House of Commons or a committee of the Senate or House of Commons, or before a legislative council, legislative assembly or house of assembly or a committee thereof that is authorized by law to administer an oath,(c) before a court, judge, justice, provincial court judge or coroner,(d) before an arbitrator or umpire, or a person or body of persons authorized by law to make an inquiry and take evidence therein under oath, or(e) before a tribunal by which a legal right or legal liability may be established,whether or not the proceeding is invalid for want of jurisdiction or for any other reason; (procédure judiciaire)",
+                    "items": [
+                        {
+                            "text": "in or under the authority of a court of justice,",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "before the Senate or House of Commons or a committee of the Senate or House of Commons, or before a legislative council, legislative assembly or house of assembly or a committee thereof that is authorized by law to administer an oath,",
+                            "label": "(b)"
+                        },
+                        {
+                            "text": "before a court, judge, justice, provincial court judge or coroner,",
+                            "label": "(c)"
+                        },
+                        {
+                            "text": "before an arbitrator or umpire, or a person or body of persons authorized by law to make an inquiry and take evidence therein under oath, or",
+                            "label": "(d)"
+                        },
+                        {
+                            "text": "before a tribunal by which a legal right or legal liability may be established,",
+                            "label": "(e)"
+                        }
+                    ]
+                },
+                {
+                    "term": "office",
+                    "text": "office includes(a) an office or appointment under the government,(b) a civil or military commission, and(c) a position or an employment in a public department; (charge ou emploi)",
+                    "items": [
+                        {
+                            "text": "an office or appointment under the government,",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "a civil or military commission, and",
+                            "label": "(b)"
+                        },
+                        {
+                            "text": "a position or an employment in a public department; (charge ou emploi)",
+                            "label": "(c)"
+                        }
+                    ]
+                },
+                {
+                    "term": "official",
+                    "text": "official means a person who(a) holds an office, or(b) is appointed or elected to discharge a public duty; (fonctionnaire)",
+                    "items": [
+                        {
+                            "text": "holds an office, or",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "is appointed or elected to discharge a public duty; (fonctionnaire)",
+                            "label": "(b)"
+                        }
+                    ]
+                },
+                {
+                    "term": "witness",
+                    "text": "witness means a person who gives evidence orally under oath or by affidavit in a judicial proceeding, whether or not he is competent to be a witness, and includes a child of tender years who gives evidence but does not give it under oath, because, in the opinion of the person presiding, the child does not understand the nature of an oath. (témoin)"
+                }
+            ],
+            "historical_note": "R.S., 1985, c. C-46, s. 118 R.S., 1985, c. 27 (1st Supp.), ss. 15, 203 2007, c. 13, s. 2"
+        },
+        {
+            "number": "3.1",
+            "marginal_note": "Effect of judicial acts",
+            "section_id": "115246",
+            "type": "SectionWithSubsections",
+            "subsections": [
+                {
+                    "number": "(1)",
+                    "text": "Unless otherwise provided or ordered, anything done by a court, justice or judge is effective from the moment it is done, whether or not it is reduced to writing."
+                },
+                {
+                    "marginal_note": "Clerk of the court",
+                    "number": "(2)",
+                    "text": "Unless otherwise provided or ordered, if anything is done from the bench by a court, justice or judge and it is reduced to writing, the clerk of the court may sign the writing."
+                }
+            ],
+            "historical_note": "2002, c. 13, s. 2 2019, c. 25, s. 3"
+        },
+        {
+            "number": "380",
+            "marginal_note": "Fraud",
+            "section_id": "122425",
+            "type": "SectionWithSubsections",
+            "subsections": [
+                {
+                    "number": "(1)",
+                    "text": "Every one who, by deceit, falsehood or other fraudulent means, whether or not it is a false pretence within the meaning of this Act, defrauds the public or any person, whether ascertained or not, of any property, money or valuable security or any service,",
+                    "items": [
+                        {
+                            "text": "is guilty of an indictable offence and liable to a term of imprisonment not exceeding fourteen years, where the subject-matter of the offence is a testamentary instrument or the value of the subject-matter of the offence exceeds five thousand dollars; or",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "is guilty",
+                            "label": "(b)",
+                            "sub_items": [
+                                {
+                                    "text": "of an indictable offence and is liable to imprisonment for a term not exceeding two years, or",
+                                    "label": "(i)"
+                                },
+                                {
+                                    "text": "of an offence punishable on summary conviction,",
+                                    "label": "(ii)"
+                                }
+                            ],
+                            "continued_text": "where the value of the subject-matter of the offence does not exceed five thousand dollars."
+                        }
+                    ]
+                },
+                {
+                    "marginal_note": "Minimum punishment",
+                    "number": "(1.1)",
+                    "text": "When a person is prosecuted on indictment and convicted of one or more offences referred to in subsection (1), the court that imposes the sentence shall impose a minimum punishment of imprisonment for a term of two years if the total value of the subject-matter of the offences exceeds one million dollars."
+                },
+                {
+                    "marginal_note": "Affecting public market",
+                    "number": "(2)",
+                    "text": "Every one who, by deceit, falsehood or other fraudulent means, whether or not it is a false pretence within the meaning of this Act, with intent to defraud, affects the public market price of stocks, shares, merchandise or anything that is offered for sale to the public is guilty of an indictable offence and liable to imprisonment for a term not exceeding fourteen years."
+                }
+            ],
+            "historical_note": "R.S., 1985, c. C-46, s. 380 R.S., 1985, c. 27 (1st Supp.), s. 54 1994, c. 44, s. 25 1997, c. 18, s. 26 2004, c. 3, s. 2 2011, c. 6, s. 2"
+        },
+        {
+            "number": "52",
+            "marginal_note": "Sabotage",
+            "section_id": "115955",
+            "type": "SectionWithSubsectionsWithInlineDefinitions",
+            "subsections": [
+                {
+                    "number": "(1)",
+                    "text": "Every person is guilty of an indictable offence and liable to imprisonment for a term of not more than 10 years or is guilty of an offence punishable on summary conviction who does a prohibited act with the intent to endanger",
+                    "items": [
+                        {
+                            "text": "the safety, security or defence of Canada, or",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "the safety or security of the naval, army or air forces of any state other than Canada that are lawfully present in Canada.",
+                            "label": "(b)"
+                        }
+                    ]
+                },
+                {
+                    "marginal_note": "Definition of prohibited act",
+                    "number": "(2)",
+                    "text": "In this section, prohibited act means an act or omission that",
+                    "items": [
+                        {
+                            "text": "impairs the efficiency or impedes the working of any vessel, vehicle, aircraft, machinery, apparatus or other thing; or",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "causes property, by whomever it may be owned, to be lost, damaged or destroyed.",
+                            "label": "(b)"
+                        }
+                    ],
+                    "defined_terms": [
+                        "prohibited act"
+                    ]
+                },
+                {
+                    "marginal_note": "Saving",
+                    "number": "(3)",
+                    "text": "No person does a prohibited act within the meaning of this section by reason only that",
+                    "items": [
+                        {
+                            "text": "he stops work as a result of the failure of his employer and himself to agree on any matter relating to his employment;",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "he stops work as a result of the failure of his employer and a bargaining agent acting on his behalf to agree on any matter relating to his employment; or",
+                            "label": "(b)"
+                        },
+                        {
+                            "text": "he stops work as a result of his taking part in a combination of workmen or employees for their own reasonable protection as workmen or employees.",
+                            "label": "(c)"
+                        }
+                    ]
+                },
+                {
+                    "marginal_note": "Idem",
+                    "number": "(4)",
+                    "text": "No person does a prohibited act within the meaning of this section by reason only that he attends at or near or approaches a dwelling-house or place for the purpose only of obtaining or communicating information."
+                },
+                {
+                    "marginal_note": "For greater certainty",
+                    "number": "(5)",
+                    "text": "For greater certainty, no person commits an offence under subsection (1) if they do a prohibited act while participating in advocacy, protest or dissent but they do not intend to cause any of the harms referred to in paragraphs (1)(a) and (b)."
+                }
+            ],
+            "historical_note": "R.S., 1985, c. C-46, s. 52 2019, c. 25, s. 6 2024, c. 16, s. 60"
+        },
+        {
+            "number": "376",
+            "marginal_note": "Counterfeiting stamp, etc.",
+            "section_id": "122374",
+            "type": "SectionWithSubsectionsWithIndentedDefinitions",
+            "subsections": [
+                {
+                    "number": "(1)",
+                    "text": "Every person is guilty of an indictable offence and liable to imprisonment for a term of not more than 14 years who",
+                    "items": [
+                        {
+                            "text": "fraudulently uses, mutilates, affixes, removes or counterfeits a stamp or part thereof,",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "knowingly and without lawful excuse has in their possession",
+                            "label": "(b)",
+                            "sub_items": [
+                                {
+                                    "text": "a counterfeit stamp or a stamp that has been fraudulently mutilated, or",
+                                    "label": "(i)"
+                                },
+                                {
+                                    "text": "anything bearing a stamp of which a part has been fraudulently erased, removed or concealed, or",
+                                    "label": "(ii)"
+                                }
+                            ]
+                        },
+                        {
+                            "text": "without lawful excuse makes or knowingly has in their possession a die or instrument that is capable of making the impression of a stamp or part of a stamp.",
+                            "label": "(c)"
+                        }
+                    ]
+                },
+                {
+                    "marginal_note": "Counterfeiting mark",
+                    "number": "(2)",
+                    "text": "Every one who, without lawful authority,",
+                    "items": [
+                        {
+                            "text": "makes a mark,",
+                            "label": "(a)"
+                        },
+                        {
+                            "text": "sells, or exposes for sale, or has in his possession a counterfeit mark,",
+                            "label": "(b)"
+                        },
+                        {
+                            "text": "affixes a mark to anything that is required by law to be marked, branded, sealed or wrapped other than the thing to which the mark was originally affixed or was intended to be affixed, or",
+                            "label": "(c)"
+                        },
+                        {
+                            "text": "affixes a counterfeit mark to anything that is required by law to be marked, branded, sealed or wrapped,",
+                            "label": "(d)"
+                        }
+                    ],
+                    "continued_text": "is guilty of an indictable offence and liable to imprisonment for a term not exceeding fourteen years."
+                },
+                {
+                    "marginal_note": "Definitions",
+                    "number": "(3)",
+                    "text": "In this section,",
+                    "definitions": [
+                        {
+                            "term": "mark",
+                            "text": "mark means a mark, brand, seal, wrapper or design used by or on behalf of(a) the government of Canada or a province,(b) the government of a state other than Canada, or(c) any department, board, commission or agent established by a government mentioned in paragraph (a) or (b) in connection with the service or business of that government; (marque)",
+                            "items": [
+                                {
+                                    "text": "the government of Canada or a province,",
+                                    "label": "(a)"
+                                },
+                                {
+                                    "text": "the government of a state other than Canada, or",
+                                    "label": "(b)"
+                                },
+                                {
+                                    "text": "any department, board, commission or agent established by a government mentioned in paragraph (a) or (b) in connection with the service or business of that government; (marque)",
+                                    "label": "(c)"
+                                }
+                            ]
+                        },
+                        {
+                            "term": "stamp",
+                            "text": "stamp means an impressed or adhesive stamp used for the purpose of revenue by the government of Canada or a province or by the government of a state other than Canada. (timbre)"
+                        }
+                    ]
+                }
+            ],
+            "historical_note": "R.S., 1985, c. C-46, s. 376 2018, c. 29, s. 43"
+        },
+        {
+            "number": "53",
+            "marginal_note": "Inciting to mutiny",
+            "section_id": "115974",
+            "type": "SectionWithContinuedText",
+            "lead_in": "53 Every one who",
+            "items": [
+                {
+                    "text": "attempts, for a traitorous or mutinous purpose, to seduce a member of the Canadian Forces from his duty and allegiance to Her Majesty, or",
+                    "label": "(a)"
+                },
+                {
+                    "text": "attempts to incite or to induce a member of the Canadian Forces to commit a traitorous or mutinous act,",
+                    "label": "(b)"
+                }
+            ],
+            "continued_text": "is guilty of an indictable offence and liable to imprisonment for a term not exceeding fourteen years.",
+            "historical_note": "R.S., c. C-34, s. 53"
+        },
+        {
+            "number": "27.1",
+            "marginal_note": "Use of force on board an aircraft",
+            "section_id": "115753",
+            "type": "SectionWithExternalReference",
+            "external_references": [
+                {
+                    "text": "Aeronautics Act",
+                    "href": "/eng/acts/A-2"
+                }
+            ],
+            "subsections": [
+                {
+                    "number": "(1)",
+                    "text": "Every person on an aircraft in flight is justified in using as much force as is reasonably necessary to prevent the commission of an offence against this Act or another Act of Parliament that the person believes on reasonable grounds, if it were committed, would be likely to cause immediate and serious injury to the aircraft or to any person or property therein."
+                },
+                {
+                    "marginal_note": "Application of this section",
+                    "number": "(2)",
+                    "text": "This section applies in respect of any aircraft in flight in Canadian airspace and in respect of any aircraft registered in Canada in accordance with the regulations made under the Aeronautics Act in flight outside Canadian airspace.",
+                    "external_references": [
+                        {
+                            "text": "Aeronautics Act",
+                            "href": "/eng/acts/A-2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

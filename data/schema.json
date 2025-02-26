@@ -1,5 +1,7 @@
 {
   "Part": {
+    "key": "h2.Part",
+    "content_key": "part",
     "tag": "h2",
     "class": "Part",
     "attributes": {
@@ -7,92 +9,484 @@
     },
     "content": "part_title",
     "subheading": {
+      "key": "h3.Subheading",
+      "content_key": "subheading",
       "tag": "h3",
       "class": "Subheading",
-      "content": "subheading"
+      "content": "subheading_text"
     }
   },
   "Section": {
+    "key": "p.Section:not(.ProvisionList)",
+    "content_key": "section",
     "tag": "p",
     "class": "Section",
     "attributes": {
       "id": "section_id"
     },
-    "content": "section_content",
+    "content": "section_text",
     "number": {
+      "key": "a.sectionLabel",
+      "content_key": "number",
       "tag": "a",
       "class": "sectionLabel",
       "content": "section_number"
     },
     "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
       "tag": "p",
       "class": "MarginalNote",
-      "content": "marginal_note"
+      "content": "marginal_note_text"
     },
     "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
       "tag": "div",
       "class": "HistoricalNote",
-      "content": "historical_note"
+      "content": "historical_note_text"
     }
   },
   "SectionWithList": {
+    "key": "p.Section:has(+ ul.ProvisionList)",
+    "content_key": "section_with_list",
     "tag": "p",
     "class": "Section",
     "attributes": {
       "id": "section_id"
     },
-    "content": "section_content",
+    "content": "section_text",
     "number": {
+      "key": "a.sectionLabel",
+      "content_key": "number",
       "tag": "a",
       "class": "sectionLabel",
       "content": "section_number"
     },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
     "provision_list": {
+      "key": "ul.ProvisionList",
+      "content_key": "provisions",
       "tag": "ul",
       "class": "ProvisionList",
       "items": {
+        "key": "li",
+        "content_key": "item",
         "tag": "li",
-        "content": "provision_content",
+        "content": "provision_text",
         "sub_items": {
+          "key": "ul.ProvisionList",
+          "content_key": "sub_items",
           "tag": "ul",
           "class": "ProvisionList",
           "items": {
+            "key": "li",
+            "content_key": "sub_item",
             "tag": "li",
-            "content": "sub_provision_content"
+            "content": "sub_provision_text"
           }
         }
       }
     },
     "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
       "tag": "div",
       "class": "HistoricalNote",
-      "content": "historical_note"
+      "content": "historical_note_text"
     }
   },
   "SectionWithInlineDefinitions": {
+    "key": "p.Section:has(span.DefinedTerm)",
+    "content_key": "section_with_definitions",
     "tag": "p",
     "class": "Section",
     "attributes": {
       "id": "section_id"
     },
-    "content": "section_content",
+    "content": "section_text",
     "number": {
+      "key": "a.sectionLabel",
+      "content_key": "number",
       "tag": "a",
       "class": "sectionLabel",
       "content": "section_number"
     },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
     "defined_terms": {
+      "key": "span.DefinedTerm",
+      "content_key": "defined_terms",
       "tag": "span",
       "class": "DefinedTerm",
-      "content": "defined_term"
+      "content": "term_text"
     },
     "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
       "tag": "div",
       "class": "HistoricalNote",
-      "content": "historical_note"
+      "content": "historical_note_text"
+    }
+  },
+  "SectionWithIndentedDefinitions": {
+    "key": "p.Section + dl.Definition",
+    "content_key": "section_with_indented_definitions",
+    "tag": "p",
+    "class": "Section",
+    "attributes": {
+      "id": "section_id"
+    },
+    "content": "section_text",
+    "number": {
+      "key": "a.sectionLabel",
+      "content_key": "number",
+      "tag": "a",
+      "class": "sectionLabel",
+      "content": "section_number"
+    },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
+    "definitions": {
+      "key": "dl.Definition",
+      "content_key": "definitions",
+      "tag": "dl",
+      "class": "Definition",
+      "terms": {
+        "key": "dt",
+        "content_key": "term",
+        "tag": "dt",
+        "content": "term_text",
+        "definition": {
+          "key": "dd",
+          "content_key": "definition",
+          "tag": "dd",
+          "content": "definition_text"
+        }
+      }
+    },
+    "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note_text"
+    }
+  },
+  "SectionWithSubsections": {
+    "key": "ul.Section.ProvisionList",
+    "content_key": "section_with_subsections",
+    "tag": "ul",
+    "class": "Section ProvisionList",
+    "attributes": {
+      "id": "section_id"
+    },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
+    "subsections": {
+      "key": "li",
+      "content_key": "subsections",
+      "tag": "li",
+      "content": "subsection_text",
+      "number": {
+        "key": "span.lawlabel",
+        "content_key": "number",
+        "tag": "span",
+        "class": "lawlabel",
+        "content": "subsection_number"
+      }
+    },
+    "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note_text"
+    }
+  },
+  "SectionWithSubsectionsWithLists": {
+    "key": "ul.Section.ProvisionList:has(ul.ProvisionList)",
+    "content_key": "section_with_subsections_and_lists",
+    "tag": "ul",
+    "class": "Section ProvisionList",
+    "attributes": {
+      "id": "section_id"
+    },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
+    "subsections": {
+      "key": "li",
+      "content_key": "subsections",
+      "tag": "li",
+      "content": "subsection_text",
+      "number": {
+        "key": "span.lawlabel",
+        "content_key": "number",
+        "tag": "span",
+        "class": "lawlabel",
+        "content": "subsection_number"
+      },
+      "provision_list": {
+        "key": "ul.ProvisionList",
+        "content_key": "provisions",
+        "tag": "ul",
+        "class": "ProvisionList",
+        "items": {
+          "key": "li",
+          "content_key": "item",
+          "tag": "li",
+          "content": "provision_text",
+          "sub_items": {
+            "key": "ul.ProvisionList",
+            "content_key": "sub_items",
+            "tag": "ul",
+            "class": "ProvisionList",
+            "items": {
+              "key": "li",
+              "content_key": "sub_item",
+              "tag": "li",
+              "content": "sub_provision_text"
+            }
+          }
+        }
+      }
+    },
+    "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note_text"
+    }
+  },
+  "SectionWithSubsectionsWithInlineDefinitions": {
+    "key": "ul.Section.ProvisionList:has(span.DefinedTerm)",
+    "content_key": "section_with_subsections_and_definitions",
+    "tag": "ul",
+    "class": "Section ProvisionList",
+    "attributes": {
+      "id": "section_id"
+    },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
+    "subsections": {
+      "key": "li",
+      "content_key": "subsections",
+      "tag": "li",
+      "content": "subsection_text",
+      "number": {
+        "key": "span.lawlabel",
+        "content_key": "number",
+        "tag": "span",
+        "class": "lawlabel",
+        "content": "subsection_number"
+      },
+      "defined_terms": {
+        "key": "span.DefinedTerm",
+        "content_key": "defined_terms",
+        "tag": "span",
+        "class": "DefinedTerm",
+        "content": "term_text"
+      }
+    },
+    "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note_text"
+    }
+  },
+  "SectionWithSubsectionsWithIndentedDefinitions": {
+    "key": "ul.Section.ProvisionList:has(dl.Definition)",
+    "content_key": "section_with_subsections_and_indented_definitions",
+    "tag": "ul",
+    "class": "Section ProvisionList",
+    "attributes": {
+      "id": "section_id"
+    },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
+    "subsections": {
+      "key": "li",
+      "content_key": "subsections",
+      "tag": "li",
+      "content": "subsection_text",
+      "number": {
+        "key": "span.lawlabel",
+        "content_key": "number",
+        "tag": "span",
+        "class": "lawlabel",
+        "content": "subsection_number"
+      },
+      "definitions": {
+        "key": "dl.Definition",
+        "content_key": "definitions",
+        "tag": "dl",
+        "class": "Definition",
+        "terms": {
+          "key": "dt",
+          "content_key": "term",
+          "tag": "dt",
+          "content": "term_text",
+          "definition": {
+            "key": "dd",
+            "content_key": "definition",
+            "tag": "dd",
+            "content": "definition_text"
+          }
+        }
+      }
+    },
+    "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note_text"
+    }
+  },
+  "SectionWithContinuedText": {
+    "key": "p.Section + ul.ProvisionList + p.ContinuedSectionSubsection",
+    "content_key": "section_with_continued_text",
+    "tag": "p",
+    "class": "Section",
+    "attributes": {
+      "id": "section_id"
+    },
+    "content": "section_text",
+    "number": {
+      "key": "a.sectionLabel",
+      "content_key": "number",
+      "tag": "a",
+      "class": "sectionLabel",
+      "content": "section_number"
+    },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
+    "provision_list": {
+      "key": "ul.ProvisionList",
+      "content_key": "provisions",
+      "tag": "ul",
+      "class": "ProvisionList",
+      "items": {
+        "key": "li",
+        "content_key": "item",
+        "tag": "li",
+        "content": "provision_text"
+      }
+    },
+    "continued_content": {
+      "key": "p.ContinuedSectionSubsection",
+      "content_key": "continued_content",
+      "tag": "p",
+      "class": "ContinuedSectionSubsection",
+      "content": "continued_text"
+    },
+    "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note_text"
+    }
+  },
+  "SectionWithExternalCrossReference": {
+    "key": "ul.Section.ProvisionList:has(cite.XRefExternalAct)",
+    "content_key": "section_with_cross_reference",
+    "tag": "ul",
+    "class": "Section ProvisionList",
+    "attributes": {
+      "id": "section_id"
+    },
+    "marginal_note": {
+      "key": "p.MarginalNote",
+      "content_key": "marginal_note",
+      "tag": "p",
+      "class": "MarginalNote",
+      "content": "marginal_note_text"
+    },
+    "subsections": {
+      "key": "li",
+      "content_key": "subsections",
+      "tag": "li",
+      "content": "subsection_text",
+      "number": {
+        "key": "span.lawlabel",
+        "content_key": "number",
+        "tag": "span",
+        "class": "lawlabel",
+        "content": "subsection_number"
+      },
+      "cross_reference": {
+        "key": "cite.XRefExternalAct",
+        "content_key": "cross_reference",
+        "tag": "cite",
+        "class": "XRefExternalAct",
+        "content": "cross_reference_text",
+        "link": {
+          "key": "a",
+          "content_key": "link",
+          "tag": "a",
+          "attributes": {
+            "href": "cross_reference_link"
+          },
+          "content": "link_text"
+        }
+      }
+    },
+    "historical_note": {
+      "key": "div.HistoricalNote",
+      "content_key": "historical_note",
+      "tag": "div",
+      "class": "HistoricalNote",
+      "content": "historical_note_text"
     }
   },
   "DocumentMetadata": {
+    "key": "meta[name]",
+    "content_key": "metadata",
     "tag": "meta",
     "attributes": {
       "name": "meta_name",
