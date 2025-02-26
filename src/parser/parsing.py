@@ -3,8 +3,9 @@ import json
 import sys
 import html
 import os
+import time
 
-HTML_FILE = 'data/parsing_code.html'  # Default to test file
+HTML_FILE = 'data/criminal_code.html'  # Updated to include the data directory
 
 
 def load_html(filename):
@@ -544,13 +545,20 @@ def extract_metadata(soup):
 
 
 def save_to_json(data, filename='parsed_data.json'):
-    """Save the extracted data to a JSON file without escaping non-ASCII characters."""
-    # Handle relative paths from the project root
-    if not os.path.isabs(filename):
-        filename = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), filename)
+    """
+    Save the data to a JSON file.
     
-    with open(filename, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
+    Args:
+        data (dict): The data to save.
+        filename (str): The name of the file to save the data to.
+    """
+    # Use absolute path for the output file
+    output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), filename)
+    
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    
+    return output_path
 
 
 def validate_parsed_data(data):
@@ -629,20 +637,28 @@ def main():
         global HTML_FILE
         HTML_FILE = sys.argv[1]
     
+    # Start timing
+    start_time = time.time()
+    
+    print(f"Starting parsing of {HTML_FILE}...")
+    
     # Load the schema
     schema = load_schema()
     
     # Load the HTML content
     html_content = load_html(HTML_FILE)
+    print(f"HTML loaded in {time.time() - start_time:.2f} seconds")
     
     # Parse the HTML content
     soup = parse_html(html_content)
+    print(f"HTML parsed in {time.time() - start_time:.2f} seconds")
     
     # Extract metadata
     metadata = extract_metadata(soup)
     
     # Extract data using the schema
     sections_data = extract_data(soup)
+    print(f"Data extraction completed in {time.time() - start_time:.2f} seconds")
     
     # Combine metadata and sections data
     data = {
@@ -653,10 +669,16 @@ def main():
     # Validate the parsed data
     validate_parsed_data(data)
     
-    # Save the data to a JSON file
-    save_to_json(data)
+    # Use a different output filename for the full code
+    output_filename = 'full_criminal_code.json' if 'criminal_code.html' in HTML_FILE else 'parsed_data.json'
     
-    print(f"Parsing complete. Data saved to {os.path.abspath('parsed_data.json')} from {HTML_FILE}")
+    # Save the data to a JSON file
+    output_path = save_to_json(data, output_filename)
+    
+    # Calculate total time
+    total_time = time.time() - start_time
+    print(f"Parsing complete in {total_time:.2f} seconds ({total_time/60:.2f} minutes)")
+    print(f"Data saved to {output_path} from {HTML_FILE}")
     
     return data
 
