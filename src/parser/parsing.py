@@ -4,8 +4,26 @@ import sys
 import html
 import os
 import time
+import re
 
 HTML_FILE = 'data/criminal_code.html'  # Updated to include the data directory
+
+
+def clean_text(text):
+    """
+    Clean text by removing problematic characters like "Â" that may appear due to encoding issues.
+    This typically happens with non-breaking spaces in UTF-8 encoding.
+    """
+    if text is None:
+        return None
+    
+    # Remove the "Â" character specifically
+    cleaned = text.replace('Â', '')
+    
+    # Also handle any other potential encoding issues with whitespace
+    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+    
+    return cleaned
 
 
 def load_html(filename):
@@ -59,10 +77,10 @@ def extract_historical_notes(element):
                 link = note.find('a')
                 if link:
                     # If it has a link, just get the text of the link
-                    note_text = link.get_text(strip=True)
+                    note_text = clean_text(link.get_text(strip=True))
                 else:
                     # Otherwise, get the full text of the note
-                    note_text = note.get_text(strip=True)
+                    note_text = clean_text(note.get_text(strip=True))
                     
                 # Include all historical notes
                 historical_notes.append(note_text)
@@ -97,7 +115,7 @@ def extract_list_items(ul_element):
             if law_label:
                 law_label.decompose()
             
-            item['text'] = p_element.get_text().strip()
+            item['text'] = clean_text(p_element.get_text().strip())
             if label:
                 item['label'] = label
 
@@ -109,7 +127,7 @@ def extract_list_items(ul_element):
         # Check for continued text after nested lists
         continued_p = li.find('p', class_='ContinuedParagraph', recursive=False)
         if continued_p:
-            item['continued_text'] = continued_p.get_text().strip()
+            item['continued_text'] = clean_text(continued_p.get_text().strip())
             
         items.append(item)
     return items
@@ -125,7 +143,7 @@ def extract_external_references(element):
     for cite in cite_elements:
         # Extract the reference text and link if available
         reference = {
-            'text': cite.get_text().strip()
+            'text': clean_text(cite.get_text().strip())
         }
         
         # Check if there's a link inside the cite element
@@ -145,12 +163,12 @@ def extract_element_content(element):
     # Extract section number if present
     section_label = element.find('a', class_='sectionLabel')
     if section_label:
-        content['number'] = section_label.get_text().strip()
+        content['number'] = clean_text(section_label.get_text().strip())
         
     # Extract marginal note
     marginal_note = element.find_previous_sibling('p', class_='MarginalNote')
     if marginal_note:
-        content['marginal_note'] = marginal_note.get_text().replace('Marginal note:', '').strip()
+        content['marginal_note'] = clean_text(marginal_note.get_text().replace('Marginal note:', '').strip())
         
     # Extract section ID
     if 'id' in element.attrs:
@@ -237,25 +255,55 @@ def extract_element_content(element):
     elif next_sibling and next_sibling.name == 'ul' and 'ProvisionList' in next_sibling.get('class', []):
         # Check if there's a continued text paragraph after the list
         list_element = next_sibling
-        continued_text = list_element.find_next_sibling()
+        continued_text_element = list_element.find_next_sibling()
         
-        if continued_text and continued_text.name == 'p' and 'ContinuedSectionSubsection' in continued_text.get('class', []):
+        if continued_text_element and continued_text_element.name == 'p' and 'ContinuedSectionSubsection' in continued_text_element.get('class', []):
             # This is a section with continued text
             content['type'] = 'SectionWithContinuedText'
-            content['lead_in'] = element.get_text().strip()
+            content['lead_in'] = clean_text(element.get_text().strip())
             content['items'] = extract_list_items(list_element)
-            content['continued_text'] = continued_text.get_text().strip()
-            print(f"  Section {section_num} has continued text: {continued_text.get_text().strip()[:30]}...")
-            print(f"  Section {section_num} classified as SectionWithContinuedText")
+            content['continued_text'] = clean_text(continued_text_element.get_text().strip())
+            print(f"  Section {section_num} has continued text: {continued_text_element.get_text().strip()[:30]}...")
             
-            # Look for historical notes after the continued text
-            historical_note = extract_historical_notes(continued_text)
-            if historical_note:
-                content['historical_note'] = historical_note
+            # Check if there's another list after the continued text
+            next_element = continued_text_element.find_next_sibling()
+            if next_element and next_element.name == 'ul' and 'ProvisionList' in next_element.get('class', []):
+                # We have another list after the continued text
+                second_list_items = extract_list_items(next_element)
+                if 'items' not in content:
+                    content['items'] = []
+                # Add a marker to indicate these are from a second list
+                for item in second_list_items:
+                    item['from_second_list'] = True
+                content['items'].extend(second_list_items)
+                print(f"  Section {section_num} has a second list with {len(second_list_items)} items")
+                
+                # Check if there's continued text after the second list
+                next_continued = next_element.find_next_sibling()
+                if next_continued and next_continued.name == 'p' and 'ContinuedSectionSubsection' in next_continued.get('class', []):
+                    content['second_continued_text'] = clean_text(next_continued.get_text().strip())
+                    print(f"  Section {section_num} has second continued text: {next_continued.get_text().strip()[:30]}...")
+                    
+                    # Look for historical notes after the second continued text
+                    historical_note = extract_historical_notes(next_continued)
+                    if historical_note:
+                        content['historical_note'] = historical_note
+                else:
+                    # Look for historical notes after the second list
+                    historical_note = extract_historical_notes(next_element)
+                    if historical_note:
+                        content['historical_note'] = historical_note
+            else:
+                # Look for historical notes after the continued text
+                historical_note = extract_historical_notes(continued_text_element)
+                if historical_note:
+                    content['historical_note'] = historical_note
+                    
+            print(f"  Section {section_num} classified as SectionWithContinuedText")
         else:
             # This is a regular section with a list
             content['type'] = 'SectionWithList'
-            content['lead_in'] = element.get_text().strip()
+            content['lead_in'] = clean_text(element.get_text().strip())
             content['items'] = extract_list_items(list_element)
             print(f"  Section {section_num} classified as SectionWithList")
             
@@ -275,7 +323,7 @@ def extract_element_content(element):
             for term in defined_terms:
                 dfn = term.find('dfn')
                 if dfn:
-                    terms.append(dfn.get_text().strip())
+                    terms.append(clean_text(dfn.get_text().strip()))
             
             if terms:
                 content['defined_terms'] = terms
@@ -284,7 +332,7 @@ def extract_element_content(element):
             content['type'] = 'SectionWithIndentedDefinitions'
             print(f"  Section {section_num} classified as SectionWithIndentedDefinitions")
             
-        content['text'] = element.get_text().strip()
+        content['text'] = clean_text(element.get_text().strip())
         
         # Extract the defined terms and their definitions
         definitions = []
@@ -297,8 +345,8 @@ def extract_element_content(element):
                 dd = dt.find_next_sibling('dd')
                 if dd:
                     definition = {
-                        'term': term,
-                        'text': dd.get_text().strip()
+                        'term': clean_text(term),
+                        'text': clean_text(dd.get_text().strip())
                     }
                     
                     # Check if the definition has a list
@@ -318,7 +366,7 @@ def extract_element_content(element):
     elif defined_terms:
         # This is a section with inline definitions
         content['type'] = 'SectionWithInlineDefinitions'
-        content['text'] = element.get_text().strip()
+        content['text'] = clean_text(element.get_text().strip())
         print(f"  Section {section_num} classified as SectionWithInlineDefinitions")
         
         # Extract the defined terms
@@ -326,7 +374,7 @@ def extract_element_content(element):
         for term in defined_terms:
             dfn = term.find('dfn')
             if dfn:
-                terms.append(dfn.get_text().strip())
+                terms.append(clean_text(dfn.get_text().strip()))
         
         if terms:
             content['defined_terms'] = terms
@@ -339,13 +387,13 @@ def extract_element_content(element):
         # Check for external references in the section text
         if external_references:
             content['type'] = 'SectionWithExternalReference'
-            content['text'] = element.get_text().strip()
+            content['text'] = clean_text(element.get_text().strip())
             content['external_references'] = external_references
             print(f"  Section {section_num} has external references")
             print(f"  Section {section_num} classified as SectionWithExternalReference")
         else:
             content['type'] = 'Section'
-            content['text'] = element.get_text().strip()
+            content['text'] = clean_text(element.get_text().strip())
             print(f"  Section {section_num} classified as regular Section")
         
         # For regular sections, look for historical notes directly after the section
@@ -367,12 +415,12 @@ def extract_subsections(ul_element):
         # Check if this subsection has its own marginal note
         marginal_note = li.find('p', class_='MarginalNote')
         if marginal_note:
-            subsection['marginal_note'] = marginal_note.get_text().replace('Marginal note:', '').strip()
+            subsection['marginal_note'] = clean_text(marginal_note.get_text().replace('Marginal note:', '').strip())
         
         # Check if this subsection has a definition marginal note
         definition_marginal_note = li.find('p', class_='MarginalNoteDefinedTerm')
         if definition_marginal_note:
-            subsection['marginal_note'] = definition_marginal_note.get_text().strip()
+            subsection['marginal_note'] = clean_text(definition_marginal_note.get_text().strip())
             # Mark this subsection as having a definition
             subsection['has_definition_marginal_note'] = True
             
@@ -402,7 +450,7 @@ def extract_subsections(ul_element):
         if law_label:
             law_label.decompose()
             
-        subsection['text'] = subsection_p.get_text().strip()
+        subsection['text'] = clean_text(subsection_p.get_text().strip())
         
         # Check for external references in the subsection
         external_references = extract_external_references(subsection_p)
@@ -417,11 +465,18 @@ def extract_subsections(ul_element):
             subsection['items'] = items
             print(f"  Subsection {subsection.get('number', 'unknown')} has {len(items)} list items")
             
-        # Check for continued text after the list
-        continued_text = li.find('p', class_='ContinuedSectionSubsection', recursive=False)
-        if continued_text:
-            subsection['continued_text'] = continued_text.get_text().strip()
-            print(f"  Subsection {subsection.get('number', 'unknown')} has continued text")
+            # Check for continued text after the list
+            # Look for a ContinuedSectionSubsection paragraph that follows the list
+            next_element = provision_list.find_next_sibling()
+            if next_element and next_element.name == 'p' and 'ContinuedSectionSubsection' in next_element.get('class', []):
+                subsection['continued_text'] = clean_text(next_element.get_text().strip())
+                print(f"  Subsection {subsection.get('number', 'unknown')} has continued text after list items")
+        else:
+            # If there's no list, still check for continued text directly after the subsection paragraph
+            continued_text = li.find('p', class_='ContinuedSectionSubsection', recursive=False)
+            if continued_text:
+                subsection['continued_text'] = clean_text(continued_text.get_text().strip())
+                print(f"  Subsection {subsection.get('number', 'unknown')} has continued text")
             
         # Check for definitions within the subsection
         definition_list = li.find('dl', class_='Definition', recursive=False)
@@ -437,8 +492,8 @@ def extract_subsections(ul_element):
                     dd = dt.find_next_sibling('dd')
                     if dd:
                         definition = {
-                            'term': term,
-                            'text': dd.get_text().strip()
+                            'term': clean_text(term),
+                            'text': clean_text(dd.get_text().strip())
                         }
                         
                         # Check if the definition has a list
@@ -459,7 +514,7 @@ def extract_subsections(ul_element):
             for term in defined_terms:
                 dfn = term.find('dfn')
                 if dfn:
-                    terms.append(dfn.get_text().strip())
+                    terms.append(clean_text(dfn.get_text().strip()))
             
             if terms:
                 subsection['defined_terms'] = terms
@@ -488,7 +543,7 @@ def extract_data(soup):
             part_data = {
                 'type': 'Part',
                 'part_id': element.get('id'),
-                'text': element.get_text().strip()
+                'text': clean_text(element.get_text().strip())
             }
             data.append(part_data)
         elif element.name == 'ul' and 'Section' in element.get('class', []) and 'ProvisionList' in element.get('class', []):
