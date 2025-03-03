@@ -1,14 +1,30 @@
 from typing import List, Optional, Dict, Any
 import json
+import math
 from src.database.repository import SectionRepository, PartRepository
+from src.database.models import PaginationMetadata
 
 class SectionService:
     """Service for handling Criminal Code section operations."""
     
     @staticmethod
-    async def get_sections(skip: int = 0, limit: int = 100) -> List[Dict[str, Any]]:
+    async def get_sections(skip: int = 0, limit: int = 100) -> Dict[str, Any]:
         """Get all sections with pagination."""
-        return await SectionRepository.get_all_sections(skip, limit)
+        sections = await SectionRepository.get_all_sections(skip, limit)
+        total_items = await SectionRepository.count_sections()
+        
+        # Calculate pagination metadata
+        pagination = PaginationMetadata(
+            page=skip // limit + 1,
+            page_size=limit,
+            total_items=total_items,
+            total_pages=math.ceil(total_items / limit)
+        )
+        
+        return {
+            "sections": sections,
+            "pagination": pagination
+        }
     
     @staticmethod
     async def get_section_by_id(section_id: str) -> Optional[Dict[str, Any]]:

@@ -37,6 +37,14 @@ class CriminalCode(BaseModel):
     """Complete Criminal Code model."""
     metadata: Metadata
     sections: List[Union[Part, Section, SubSection, Paragraph]]
+
+# Pagination metadata models
+class PaginationMetadata(BaseModel):
+    """Common pagination metadata for list responses."""
+    page: int
+    page_size: int
+    total_items: int
+    total_pages: int
     
 # API Response Models
 class SectionResponse(BaseModel):
@@ -50,6 +58,7 @@ class SectionResponse(BaseModel):
 class SectionListResponse(BaseModel):
     """Response model for a list of sections."""
     sections: List[SectionResponse]
+    pagination: PaginationMetadata
     
 class SearchResult(BaseModel):
     """Model for search results."""
@@ -62,7 +71,5 @@ class SearchResult(BaseModel):
     
 class SearchResponse(BaseModel):
     """Response model for search queries."""
-    total_results: int
     results: List[SearchResult]
-    page: int
-    page_size: int 
+    pagination: PaginationMetadata 

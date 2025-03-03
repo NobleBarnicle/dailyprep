@@ -13,6 +13,16 @@ We've implemented a modern, layered architecture following best practices:
 
 This separation of concerns makes the code more maintainable and testable.
 
+## Technology Stack
+
+- **Python 3.11**: Core programming language (confirmed optimal version)
+- **FastAPI**: Modern, high-performance web framework
+- **MongoDB**: NoSQL database for storing Criminal Code data
+- **Elasticsearch**: Search engine for full-text search capabilities
+- **Docker**: Containerization for consistent development and deployment
+- **Motor**: Asynchronous MongoDB driver for Python
+- **Pydantic**: Data validation and settings management
+
 ## Key Files and Their Purposes
 
 ### API Layer
@@ -94,6 +104,11 @@ This separation of concerns makes the code more maintainable and testable.
   - Elasticsearch for search functionality
   - Data import service (one-time job)
 
+- **`docker-compose.test.yml`**: Provides a testing environment:
+  - MongoDB container for data storage
+  - Elasticsearch container for search functionality
+  - Configured for local development and testing
+
 - **`.env.example`**: Template for environment variables:
   - Database connection settings
   - Elasticsearch configuration
@@ -159,6 +174,9 @@ For search requests, the flow is similar but uses Elasticsearch instead of Mongo
 
 We've completed:
 - Phase 1: Backend Foundation
-- Phase 2: Search Functionality
+- Phase 2: Search Functionality and Database Integration
+  - Successfully set up MongoDB and Elasticsearch
+  - Imported Criminal Code data into both databases
+  - Implemented and tested API endpoints
 
 Next is Phase 3: Frontend Development, which will involve building a React application that consumes our API. 

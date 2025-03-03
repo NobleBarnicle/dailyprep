@@ -3,6 +3,7 @@ from typing import List, Dict, Any
 
 from src.services.section_service import SectionService
 
+# Initialize router
 router = APIRouter()
 
 @router.get("/")

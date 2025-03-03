@@ -1,6 +1,6 @@
 # Criminal Code Web Application Project Outline
 
-Version: 0.1.0 Last Updated: 2024-02-07
+Version: 0.2.0 Last Updated: 2025-03-03
 
 ## Vision
 The vision for the web-app is a version of the Criminal Code of Canada built for busy criminal lawyers. The current government website has significant limitations in navigation, aesthetics, UI/UX, scrolling behavior, and mobile responsiveness. This project aims to create a superior alternative while serving as a learning experience in modern web development and LLM integration.
@@ -8,76 +8,76 @@ The vision for the web-app is a version of the Criminal Code of Canada built for
 Base_URL: https://laws-lois.justice.gc.ca/eng/acts/c-46/FullText.html
 
 ## Backend Architecture
-### Flask App
 
-- Python-based RESTful API
-- Modular blueprint structure
+### FastAPI Application
+
+- Python 3.11-based RESTful API
+- Asynchronous request handling
+- Modular router structure
 - CORS handling for frontend integration
-- Request validation middleware
-- Error handling and logging
+- Automatic request validation with Pydantic
+- Comprehensive error handling and logging
+- Dependency injection for services
 
-### Web Scraping
+### Data Processing
 
 - BeautifulSoup4 for HTML parsing
 - Automated data extraction pipeline
-- Version control for scraped content
 - Data cleaning and normalization
-- Validation against schema
+- JSON-based data structure
 
 ### Database Design
 
-- PostgreSQL for primary storage
-- Hierarchical data structure
-- JSON support for flexibility
-- Tables:
-  - Parts
-  - Sections
-  - Subsections (recursive)
-  - Notes (marginal/historical)
+- MongoDB for primary storage
+- Hierarchical document structure
+- Collections:
+  - Parts (structural divisions of the code)
+  - Sections (individual provisions)
+  - Additional metadata
 
 ### Search Engine
 
-- Elasticsearch integration
+- Elasticsearch integration (completed)
 - Full-text search capabilities
-- Synchronized with PostgreSQL
+- Custom analyzers for legal terminology
+- Highlighting of search results
+- Relevance scoring
 
 ### API Design  
 
 - RESTful architecture
 - Key endpoints:
-  - GET /parts
-  - GET /sections/:id
-  - GET /search
-  - POST /notes (future)
+  - GET /api/sections - List sections with pagination
+  - GET /api/sections/{section_id} - Get specific section
+  - GET /api/sections/number/{number} - Get section by number
+  - GET /api/search - Search with query parameters
+  - GET /api/table-of-contents - Get hierarchical structure
 
 ## Infrastructure
 
-### Caching
+### Docker Containerization
 
-- Redis implementation
-- In-memory data storage
+- Multi-container setup with docker-compose
+- Separate containers for:
+  - FastAPI application
+  - MongoDB database
+  - Elasticsearch service
+- Development and testing environments
+
+### Caching (Planned)
+
+- In-memory data caching
 - Performance optimization
-
-### Load Balancing
-
-- Nginx/HAProxy
-- High availability
-- Scalability support
 
 ## Security
 
 ### API Security
 
-- Input validation
-- Rate limiting
-- HTTPS implementation
+- Input validation with Pydantic
+- CORS configuration
+- HTTPS implementation (planned for production)
 
-### Authentication (Future)
-
-- JWT implementation
-- User account management
-
-## Frontend Architecture
+## Frontend Architecture (Planned)
 
 ### Framework
 
@@ -88,10 +88,9 @@ Base_URL: https://laws-lois.justice.gc.ca/eng/acts/c-46/FullText.html
 ### Core Layout Components
 
 - Main Reading Pane
-
-- Vertical scrolling view
-- Continuous page presentation
-- Infinite scroll with lazy loading
+  - Vertical scrolling view
+  - Continuous page presentation
+  - Infinite scroll with lazy loading
 
 ### Top Bar
 
@@ -106,7 +105,7 @@ Base_URL: https://laws-lois.justice.gc.ca/eng/acts/c-46/FullText.html
 - Floating behavior during scroll
 - Critical for navigation and user experience
 
-## User Experience Features
+## User Experience Features (Planned)
 
 ### Search Functionality
 
@@ -118,7 +117,7 @@ Base_URL: https://laws-lois.justice.gc.ca/eng/acts/c-46/FullText.html
 
 ### Visual Design
 
-Modern, sleek aesthetic
+- Modern, sleek aesthetic
 - Light/dark mode toggle
 - Sans-serif fonts for readability
 - Adjustable font sizing
@@ -135,14 +134,15 @@ Modern, sleek aesthetic
 
 ### Performance Optimizations
 
-- Infinite scroll implementation
-- Lazy loading of content
-- Async data fetching
-- Content pre-loading
+- Asynchronous API with FastAPI
+- Efficient database queries
+- Optimized search indexing
 
-### Server-side rendering (SSR) for initial load
+### Frontend Development (Next Phase)
 
+- Server-side rendering (SSR) for initial load
 - Static site generation (SSG) for static content
+- Client-side data fetching for dynamic content
 
 ### Suggested Libraries
 

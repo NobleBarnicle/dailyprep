@@ -15,6 +15,13 @@ class SectionRepository:
         return sections
     
     @staticmethod
+    async def count_sections() -> int:
+        """Count total number of sections in the database."""
+        db = get_database()
+        count = await db[SECTIONS_COLLECTION].count_documents({})
+        return count
+    
+    @staticmethod
     async def get_section_by_id(section_id: str) -> Optional[Dict[str, Any]]:
         """Get a section by its ID."""
         db = get_database()

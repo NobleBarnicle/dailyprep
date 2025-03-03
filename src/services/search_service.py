@@ -1,7 +1,9 @@
 from typing import Dict, List, Any, Optional
 import os
+import math
 from elasticsearch import AsyncElasticsearch
 from dotenv import load_dotenv
+from src.database.models import PaginationMetadata
 
 load_dotenv()
 
@@ -49,44 +51,21 @@ class SearchService:
                     "type": {"type": "keyword"},
                     "text": {
                         "type": "text",
-                        "analyzer": "english",
-                        "fields": {
-                            "keyword": {"type": "keyword"}
-                        }
+                        "analyzer": "english"
                     },
                     "marginal_note": {
-                        "type": "text",
-                        "analyzer": "english",
-                        "fields": {
-                            "keyword": {"type": "keyword"}
-                        }
-                    }
-                }
-            },
-            "settings": {
-                "analysis": {
-                    "analyzer": {
-                        "english": {
-                            "tokenizer": "standard",
-                            "filter": ["lowercase", "english_stop", "english_stemmer"]
-                        }
-                    },
-                    "filter": {
-                        "english_stop": {
-                            "type": "stop",
-                            "stopwords": "_english_"
-                        },
-                        "english_stemmer": {
-                            "type": "stemmer",
-                            "language": "english"
-                        }
+                        "type": "text", 
+                        "analyzer": "english"
                     }
                 }
             }
         }
         
-        await cls.es_client.indices.create(index=ELASTICSEARCH_INDEX, body=mappings)
-    
+        await cls.es_client.indices.create(
+            index=ELASTICSEARCH_INDEX,
+            body=mappings
+        )
+        
     @classmethod
     async def index_document(cls, document: Dict[str, Any]):
         """Index a document in Elasticsearch."""
@@ -118,18 +97,32 @@ class SearchService:
     
     @classmethod
     async def search(cls, query: str, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
-        """Search the Criminal Code index."""
+        """
+        Search the Criminal Code for matching sections.
+        
+        Args:
+            query: The search query
+            page: Page number (1-indexed)
+            page_size: Number of results per page
+            
+        Returns:
+            Dict containing search results and pagination info
+        """
         if not cls.es_client:
             await cls.initialize()
             
+        # Calculate from for pagination
         from_val = (page - 1) * page_size
         
+        # Build search query
         search_query = {
+            "from": from_val,
+            "size": page_size,
             "query": {
                 "multi_match": {
                     "query": query,
                     "fields": ["text^2", "marginal_note"],
-                    "fuzziness": "AUTO"
+                    "type": "best_fields"
                 }
             },
             "highlight": {
@@ -137,18 +130,18 @@ class SearchService:
                     "text": {},
                     "marginal_note": {}
                 }
-            },
-            "from": from_val,
-            "size": page_size
+            }
         }
         
+        # Execute search
         response = await cls.es_client.search(
             index=ELASTICSEARCH_INDEX,
             body=search_query
         )
         
+        # Process results
         hits = response["hits"]["hits"]
-        total = response["hits"]["total"]["value"]
+        total_hits = response["hits"]["total"]["value"]
         
         results = []
         for hit in hits:
@@ -156,21 +149,27 @@ class SearchService:
             highlights = []
             
             if "highlight" in hit:
-                for field, field_highlights in hit["highlight"].items():
-                    highlights.extend(field_highlights)
+                for field, hl_list in hit["highlight"].items():
+                    highlights.extend(hl_list)
             
             results.append({
-                "section_id": source["section_id"],
+                "section_id": source.get("section_id", ""),
                 "number": source.get("number", ""),
-                "type": source["type"],
-                "text": source["text"],
+                "type": source.get("type", ""),
+                "text": source.get("text", ""),
                 "score": hit["_score"],
                 "highlights": highlights
             })
         
+        # Create pagination metadata
+        pagination = PaginationMetadata(
+            page=page,
+            page_size=page_size,
+            total_items=total_hits,
+            total_pages=math.ceil(total_hits / page_size)
+        )
+        
         return {
-            "total_results": total,
             "results": results,
-            "page": page,
-            "page_size": page_size
+            "pagination": pagination
         } 
