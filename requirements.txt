@@ -5,6 +5,7 @@ requests==2.31.0
 # Testing
 pytest==8.0.0
 pytest-cov==4.1.0
+aiohttp==3.9.3
 
 # Code Quality
 black==24.1.1
@@ -13,4 +14,15 @@ mypy==1.8.0
 
 # Type Hints
 types-requests==2.31.0.20240125
-types-beautifulsoup4==4.12.0.20240106 
+types-beautifulsoup4==4.12.0.20240106
+
+# Backend
+fastapi==0.109.2
+uvicorn==0.27.1
+pydantic==2.6.1
+motor==3.3.2  # MongoDB async driver
+elasticsearch==8.11.1
+
+# Utilities
+python-dotenv==1.0.0
+httpx==0.26.0  # For testing FastAPI 

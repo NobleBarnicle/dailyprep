@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # API service
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=criminal_code
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_INDEX=criminal_code
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=false
+    depends_on:
+      - mongodb
+      - elasticsearch
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+
+  # MongoDB service
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  # Elasticsearch service
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    restart: unless-stopped
+
+  # Data import service (runs once and exits)
+  data-import:
+    build: .
+    command: python -m src.scripts.import_data
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=criminal_code
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_INDEX=criminal_code
+    depends_on:
+      - mongodb
+      - elasticsearch
+    restart: on-failure
+    volumes:
+      - ./data:/app/data
+
+volumes:
+  mongodb_data:
+  elasticsearch_data: 
